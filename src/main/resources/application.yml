@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/example-todo # db 경로
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create # 애플리케이션 시작 시 모든 table drop하고 새로 create / 개발 단계에서만 사용
+    properties:
+      hibernate:
+        format_sql: true # 표시되는 sql 정렬
+
+logging.level:
+  org.hibernate.SQL: debug # sql 표시
