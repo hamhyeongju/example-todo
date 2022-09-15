@@ -1,9 +1,10 @@
-package example.todo.service;
+package example.todo.service.memberService;
 
 import example.todo.Domain.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface MemberService {
@@ -12,5 +13,5 @@ public interface MemberService {
 
     List<Member> findAll();
 
-    Member findById(Long id);
+    Optional<Member> findById(Long id);
 }
