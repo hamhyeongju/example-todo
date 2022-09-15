@@ -24,15 +24,28 @@ public class ToDo {
     private LocalDate createdDate;
     private LocalDate dueDate;
 
-    public ToDo (String title, String description, LocalDate dueDate) {
-        this.title = title;
-        this.description = description;
-        this.createdDate = LocalDate.now();
-        this.dueDate = dueDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public static ToDo createToDo(String title, String description, LocalDate dueDate, Member member) {
+        ToDo toDo = new ToDo();
+        toDo.title = title;
+        toDo.description = description;
+        toDo.createdDate = LocalDate.now();
+        toDo.dueDate = dueDate;
+        if (member != null) toDo.configMember(member);
+
+        return toDo;
     }
 
     public void changeStatus() {
         this.isCompleted = !this.isCompleted;
+    }
+
+    private void configMember(Member member) {
+        this.member = member;
+        member.getToDoList().add(this);
     }
 
 }

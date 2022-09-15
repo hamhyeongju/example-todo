@@ -4,10 +4,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +19,9 @@ public class Member {
     private String loginId;
     private String password;
     private String name;
+
+    @OneToMany(mappedBy = "member")
+    private List<ToDo> toDoList = new ArrayList<>();
 
     public Member(String loginId, String password, String name) {
         this.loginId = loginId;
