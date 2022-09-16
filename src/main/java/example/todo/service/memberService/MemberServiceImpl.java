@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
     @Transactional
     public Long save(Member member) {
         // loginId 중복 체크
-        return repository.findByLoginId(member.getLoginId()) == null ? repository.save(member).getId() : null;
+        return repository.findByLoginId(member.getLoginId()).isEmpty() ? repository.save(member).getId() : null;
     }
 
     @Override
