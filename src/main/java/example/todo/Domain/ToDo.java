@@ -43,6 +43,12 @@ public class ToDo {
         this.isCompleted = !this.isCompleted;
     }
 
+    public void update(String title, String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
+
     private void configMember(Member member) {
         this.member = member;
         member.getToDoList().add(this);

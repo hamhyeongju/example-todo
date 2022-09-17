@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,17 @@ public class ToDoServiceImpl implements ToDoService{
     @Override
     public List<ToDo> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public void update(Long id, String title, String description, LocalDate dueDate) {
+        Optional<ToDo> toDo = repository.findById(id);
+        toDo.ifPresent(t -> t.update(title, description, dueDate));
+    }
+
+    @Override
+    public void changeStatus(Long id) {
+
     }
 
     @Override
