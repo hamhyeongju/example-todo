@@ -3,7 +3,6 @@ package example.todo.repository;
 import example.todo.Domain.Member;
 import example.todo.service.LoginService.LoginServiceImpl;
 import example.todo.service.memberService.MemberServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.useDefaultRepresentation;
 
 @SpringBootTest
-@Rollback(value = false)
+//@Rollback(value = false)
 class MemberRepositoryTest {
 
     @Autowired

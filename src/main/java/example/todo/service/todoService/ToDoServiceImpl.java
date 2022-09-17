@@ -34,14 +34,17 @@ public class ToDoServiceImpl implements ToDoService{
     }
 
     @Override
+    @Transactional
     public void update(Long id, String title, String description, LocalDate dueDate) {
         Optional<ToDo> toDo = repository.findById(id);
         toDo.ifPresent(t -> t.update(title, description, dueDate));
     }
 
     @Override
+    @Transactional
     public void changeStatus(Long id) {
-
+        Optional<ToDo> findToDo = repository.findById(id);
+        findToDo.ifPresent(toDo -> toDo.changeStatus());
     }
 
     @Override
