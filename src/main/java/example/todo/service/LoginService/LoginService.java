@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+//@Service
 public interface LoginService {
 
     Optional<Member> login(String loginId, String password);
