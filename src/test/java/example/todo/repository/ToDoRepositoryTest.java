@@ -43,4 +43,20 @@ class ToDoRepositoryTest {
         assertThat(findMember).isEqualTo(member1);
     }
 
+    @Test
+    public void delete() throws Exception {
+        //given
+        Member member1 = new Member("123", "456", "member1");
+        ToDo toDo = ToDo.createToDo("title", "description", null, member1);
+        memberService.save(member1);
+        Long savedToDoId = toDoService.save(toDo);
+
+        //when
+        toDoService.delete(toDo);
+
+        //then
+        Optional<ToDo> findToDo = toDoService.findById(savedToDoId);
+        assertThat(findToDo.isEmpty()).isTrue();
+    }
+
 }
