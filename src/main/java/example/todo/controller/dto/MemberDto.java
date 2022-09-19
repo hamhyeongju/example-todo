@@ -12,5 +12,7 @@ public class MemberDto {
     @NotNull
     private String password;
     @NotNull
+    private String checkPassword;
+    @NotNull
     private String name;
 }
