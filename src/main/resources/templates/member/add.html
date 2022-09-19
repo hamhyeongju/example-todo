@@ -9,7 +9,7 @@
 <div class="container position-absolute top-50 start-50 translate-middle">
     <hr class="mt-5 my-4">
     <h2 class="text-center">회원 가입</h2>
-    <form action="home.html" th:action th:object="${memberDto}" method="post">
+    <form th:object="${memberDto}" method="post">
         <div class="d-grid gap-2 col-6 mx-auto">
             <label for="name" class="form-label">이름</label>
             <input type="text" id="name" class="w-100 form-control" th:field="*{name}">
