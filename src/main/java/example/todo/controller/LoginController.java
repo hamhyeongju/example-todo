@@ -21,12 +21,12 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping
+    @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto) {
         return "/login/form";
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public String login(@ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
