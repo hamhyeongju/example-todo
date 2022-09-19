@@ -1,6 +1,7 @@
 package example.todo.controller;
 
 import example.todo.Domain.Member;
+import example.todo.controller.dto.LoginDto;
 import example.todo.service.LoginService.LoginService;
 import example.todo.service.memberService.MemberService;
 import lombok.RequiredArgsConstructor;
