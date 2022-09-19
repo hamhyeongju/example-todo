@@ -15,30 +15,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@Controller("/login")
+@Controller
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final MemberService memberService;
     private final LoginService loginService;
 
     @GetMapping
-    public String loginForm() {
-        return "/form";
+    public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto) {
+        return "/login/form";
     }
 
     @PostMapping
     public String login(@ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/form";
+            return "/login/form";
         }
 
         Optional<Member> loginMember = loginService.login(loginDto.getLoginId(), loginDto.getPassword());
 
         if (loginMember.isEmpty()) {
             bindingResult.reject("loginFail", "id password 에러");
-            return "/form";
+            return "/login/form";
         }
 
         HttpSession session = request.getSession();
