@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -23,8 +22,8 @@ public class HomeController {
     private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return "/index";
+    public String home() {
+        return "home";
     }
 
     @GetMapping("/add")
