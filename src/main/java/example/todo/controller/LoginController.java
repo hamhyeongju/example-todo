@@ -42,7 +42,7 @@ public class LoginController {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", loginMember);
+        session.setAttribute("loginMember", loginMember.get());
 
         return "redirect:/todo";
     }
