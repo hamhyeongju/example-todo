@@ -34,7 +34,11 @@ public class HomeController {
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
 
+        if (!bindingResult.hasErrors() && !memberDto.getPassword().equals(memberDto.getCheckPassword()))
+            bindingResult.rejectValue("checkPassword", "", "비밀번호가 일치하지 않습니다.");
+
         if (bindingResult.hasErrors()) return "/member/add";
+
 
         Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName());
         return memberService.save(member) != null ? "redirect:/" : "/member/add";
