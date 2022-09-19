@@ -27,7 +27,7 @@ public class HomeController {
     }
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute MemberDto memberDto) {
+    public String addForm(@ModelAttribute("memberDto") MemberDto memberDto) {
         return "/member/add";
     }
 

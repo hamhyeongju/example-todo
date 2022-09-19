@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container position-absolute top-50 start-50 translate-middle">
     <div class="py-5 text-center">
         <hr class="my-4">
         <h2>홈 화면</h2>
@@ -16,7 +16,7 @@
                 th:onclick="|location.href='@{/add}'|">
             회원 가입
         </button>
-        <button class="w-100 btn btn-success btn-lg"
+        <button class="w-100 btn btn-secondary btn-lg"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/login}'|" type="button">
             로그인
