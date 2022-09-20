@@ -7,6 +7,7 @@ import example.todo.service.memberService.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginDto loginDto, BindingResult bindingResult,
+    public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "/login/form";

@@ -7,6 +7,7 @@ import example.todo.service.memberService.MemberService;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+@Controller
 @RequiredArgsConstructor
 public class ToDoController {
 
@@ -48,7 +49,7 @@ public class ToDoController {
     }
 
     @GetMapping("/todo")
-    public String main(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
+    public String todo(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
         return "/todo/main";
     }
 
@@ -65,7 +66,7 @@ public class ToDoController {
                 member));
         createToDo.ifPresent(toDo -> toDoService.save(toDo));
 
-        return "redirect:/main";
+        return "redirect:/todo";
     }
 
     @PostMapping("/main/update")
@@ -75,7 +76,7 @@ public class ToDoController {
         }
 
         toDoService.update(toDoDto.getId(), toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
-        return "redirect:/main";
+        return "redirect:/todo";
     }
 
     @PostMapping("/main/change")
@@ -86,12 +87,12 @@ public class ToDoController {
 
         toDoService.update(toDoDto.getId(), toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
         toDoService.changeStatus(toDoDto.getId());
-        return "redirect:/main";
+        return "redirect:/todo";
     }
 
     @PostMapping("/main/delete")
-    public String delete(@ModelAttribute ToDoDto toDoDto) {
+    public String delete(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
         toDoService.findById(toDoDto.getId()).ifPresent(toDo -> toDoService.delete(toDo));
-        return "redirect:/main";
+        return "redirect:/todo";
     }
 }
