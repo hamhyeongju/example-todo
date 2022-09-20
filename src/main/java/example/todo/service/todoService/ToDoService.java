@@ -1,7 +1,6 @@
 package example.todo.service.todoService;
 
 import example.todo.Domain.ToDo;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,5 +21,5 @@ public interface ToDoService {
 
     void delete(ToDo toDo);
 
-    List<ToDo> findToDoListByIsCompleted(Long id, Boolean isCompleted);
+    List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
 }

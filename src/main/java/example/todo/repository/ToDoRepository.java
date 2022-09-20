@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ToDoRepository extends JpaRepository<ToDo, Long> {
 
-    List<ToDo> findToDoListByIdAndIsCompleted(Long id, Boolean isCompleted);
+    List<ToDo> findToDoListByMemberIdAndIsCompleted(Long memberId, Boolean isCompleted);
 }

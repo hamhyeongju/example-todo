@@ -54,7 +54,7 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public List<ToDo> findToDoListByIsCompleted(Long id, Boolean isCompleted) {
-        return repository.findToDoListByIdAndIsCompleted(id, isCompleted);
+    public List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
+        return repository.findToDoListByMemberIdAndIsCompleted(id, isCompleted);
     }
 }

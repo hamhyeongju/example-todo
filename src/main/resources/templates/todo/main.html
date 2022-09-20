@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div class="container position-absolute top-50 start-50 translate-middle">
+    <h1 class="text-center" th:text="|${session.loginMember.name}의 ToDo List|"></h1>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>제목</th>
+                        <th>설명</th>
+                        <th>생성일</th>
+                        <th>마감일</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="todo : ${toDoDtos}">
+                        <form method="post" th:object="${toDoDto}">
+                            <td th:text="${todoStat.count}"></td>
+                            <td>
+                                <input type="text" readonly name="title"
+                                       th:value="${todo.title}">
+                            </td>
+                            <td>
+                                <input type="text" readonly name="description"
+                                       th:value="${todo.description}">
+                            </td>
+                            <td>
+                                <input type="date" readonly name="createdDate"
+                                       th:value="${todo.createdDate}">
+                            <td>
+                                <input type="date" readonly name="dueDate"
+                                       th:value="${todo.dueDate}">
+                            </td>
+                            <td>
+                                <button type="submit" th:formaction="@{/todo/update}">수정</button>
+                            </td>
+                            <td>
+                                <button type="submit" th:formaction="@{/todo/change}">완료</button>
+                            </td>
+                        </form>
+                        <td>
+                            <form method="post">
+                                <button type="submit" th:formaction="@{/main/delete}">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>제목</th>
+                        <th>설명</th>
+                        <th>생성일</th>
+                        <th>마감일</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="todo : ${CompletedDtos}">
+                        <form method="post" th:object="${toDoDto}">
+                            <td th:text="${todoStat.count}"></td>
+                            <td>
+                                <input type="text" readonly name="title"
+                                       th:value="${todo.title}">
+                            </td>
+                            <td>
+                                <input type="text" readonly name="description"
+                                       th:value="${todo.description}">
+                            </td>
+                            <td>
+                                <input type="date" readonly name="createdDate"
+                                       th:value="${todo.createdDate}">
+                            <td>
+                                <input type="date" readonly name="dueDate"
+                                       th:value="${todo.dueDate}">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button type="submit" th:formaction="@{/todo/change}">취소</button>
+                            </td>
+                        </form>
+                        <td>
+                            <form method="post">
+                                <button type="submit" th:formaction="@{/main/delete}">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
