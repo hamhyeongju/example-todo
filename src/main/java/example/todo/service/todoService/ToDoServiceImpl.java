@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ToDoServiceImpl implements ToDoService{
+public class ToDoServiceImpl implements ToDoService {
 
     private final ToDoRepository repository;
 
@@ -51,5 +51,10 @@ public class ToDoServiceImpl implements ToDoService{
     @Transactional
     public void delete(ToDo toDo) {
         repository.delete(toDo);
+    }
+
+    @Override
+    public List<ToDo> findToDoListByIsCompleted(Long id, Boolean isCompleted) {
+        return repository.findToDoListByIdAndIsCompleted(id, isCompleted);
     }
 }

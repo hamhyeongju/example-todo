@@ -3,6 +3,9 @@ package example.todo.repository;
 import example.todo.Domain.ToDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface ToDoRepository extends JpaRepository<ToDo, Long> {
 
+    List<ToDo> findToDoListByIdAndIsCompleted(Long id, Boolean isCompleted);
 }

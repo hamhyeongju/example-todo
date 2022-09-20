@@ -22,4 +22,5 @@ public interface ToDoService {
 
     void delete(ToDo toDo);
 
+    List<ToDo> findToDoListByIsCompleted(Long id, Boolean isCompleted);
 }
