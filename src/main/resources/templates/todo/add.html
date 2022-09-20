@@ -9,7 +9,7 @@
 <div class="container position-absolute top-50 start-50 translate-middle">
     <h1 class="text-center" th:text="|${session.loginMember.name}의 ToDo List|"></h1>
 
-    <div>
+    <div class="d-grid gap-2 col-6 mx-auto">
         <form method="post" th:action="@{/todo/add}" th:object="${toDoDto}">
             <fieldset>
                 <legend class="text-center">일정 추가</legend>

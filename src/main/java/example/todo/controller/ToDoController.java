@@ -6,7 +6,6 @@ import example.todo.controller.dto.ToDoDto;
 import example.todo.service.memberService.MemberService;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -53,11 +52,16 @@ public class ToDoController {
         return "/todo/main";
     }
 
+    @GetMapping("/todo/add")
+    public String addForm(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
+        return "/todo/add";
+    }
+
     @PostMapping("/todo/add")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
-            return "/todo/main";
+            return "/todo/add";
         }
 
         Optional<Member> findMember = memberService.findById(getSessionMember(request).getId());
@@ -69,23 +73,19 @@ public class ToDoController {
         return "redirect:/todo";
     }
 
-    @PostMapping("/main/update")
+    @PostMapping("/todo/update")
     public String update(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/todo/main";
+            return "/todo/update";
         }
 
         toDoService.update(toDoDto.getId(), toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
         return "redirect:/todo";
     }
 
-    @PostMapping("/main/change")
-    public String change(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/todo/main";
-        }
+    @PostMapping("/todo/change")
+    public String change(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto) {
 
-        toDoService.update(toDoDto.getId(), toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
         toDoService.changeStatus(toDoDto.getId());
         return "redirect:/todo";
     }
