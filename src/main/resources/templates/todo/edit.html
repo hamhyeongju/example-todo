@@ -8,7 +8,7 @@
 
 <div class="container position-absolute top-50 start-50 translate-middle">
     <div class="d-grid gap-2 col-6 mx-auto">
-        <form method="post" th:action="@{/todo/add}" th:object="${toDoDto}">
+        <form method="post" th:object="${toDoDto}">
             <fieldset>
                 <legend class="text-center">일정 추가</legend>
                 <div class="row">
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-auto me-auto"></div>
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">추가</button>
+                        <button type="submit" class="btn btn-primary" th:formaction="@{/todo/update/{id} (id=${toDoDto.id})}">수정</button>
                     </div>
                     <div class="col-auto">
                         <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/todo}'|">취소</button>

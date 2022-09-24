@@ -44,7 +44,7 @@
                                        th:value="${todo.dueDate}">
                             </td>
                             <td>
-                                <button type="submit" th:formaction="@{/todo/update/{id} (id=${todo.id})}">수정</button>
+                                <button type="button" th:onclick="|location.href='@{/todo/update/{id}(id=${todo.id})}'|">수정</button>
                             </td>
                             <td>
                                 <button type="submit" th:formaction="@{/todo/change/{id} (id=${todo.id})}">완료</button>

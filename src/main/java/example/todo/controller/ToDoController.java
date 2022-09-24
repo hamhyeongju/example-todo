@@ -7,6 +7,7 @@ import example.todo.service.memberService.MemberService;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,11 +73,24 @@ public class ToDoController {
         return "redirect:/todo";
     }
 
+    @GetMapping("/todo/update/{id}")
+    public String editForm(@PathVariable Long id,  Model model) {
+        if (id != null) {
+            Optional<ToDo> todo = toDoService.findById(id);
+            todo.ifPresent(toDoDto -> model.addAttribute("toDoDto", toDoDto));
+        } else {
+            return "redirect:/todo";
+        }
+
+        return "/todo/edit";
+    }
+
     @PostMapping("/todo/update/{id}")
     public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "/todo/update";
+        if (bindingResult.hasErrors()) return "/todo/edit";
 
-        toDoService.update(id, toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
+        if (id != null)
+            toDoService.update(id, toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
         return "redirect:/todo";
     }
 
