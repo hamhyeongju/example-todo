@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,9 +61,7 @@ public class ToDoController {
     @PostMapping("/todo/add")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult, HttpServletRequest request) {
 
-        if (bindingResult.hasErrors()) {
-            return "/todo/add";
-        }
+        if (bindingResult.hasErrors()) return "/todo/add";
 
         Optional<Member> findMember = memberService.findById(getSessionMember(request).getId());
         Optional<ToDo> createToDo = findMember.map(member -> ToDo.createToDo(
@@ -73,26 +72,23 @@ public class ToDoController {
         return "redirect:/todo";
     }
 
-    @PostMapping("/todo/update")
-    public String update(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/todo/update";
-        }
+    @PostMapping("/todo/update/{id}")
+    public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "/todo/update";
 
-        toDoService.update(toDoDto.getId(), toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
+        toDoService.update(id, toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());
         return "redirect:/todo";
     }
 
-    @PostMapping("/todo/change")
-    public String change(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto) {
-
-        toDoService.changeStatus(toDoDto.getId());
+    @PostMapping("/todo/change/{id}")
+    public String change(@PathVariable Long id) {
+        if (id != null) toDoService.changeStatus(id);
         return "redirect:/todo";
     }
 
-    @PostMapping("/main/delete")
-    public String delete(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
-        toDoService.findById(toDoDto.getId()).ifPresent(toDo -> toDoService.delete(toDo));
+    @PostMapping("/main/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        if (id != null) toDoService.findById(id).ifPresent(toDo -> toDoService.delete(toDo));
         return "redirect:/todo";
     }
 }
