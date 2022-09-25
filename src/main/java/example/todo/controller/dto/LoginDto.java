@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter @Setter
 public class LoginDto {
-    @NotEmpty
     private String loginId;
-    @NotEmpty
     private String password;
 }
