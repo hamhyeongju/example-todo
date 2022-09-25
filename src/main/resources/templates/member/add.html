@@ -7,8 +7,9 @@
 
 <body>
 <div class="container position-absolute top-50 start-50 translate-middle">
-    <hr class="mt-5 my-4">
+    <hr class="mb-4">
     <h2 class="text-center">회원 가입</h2>
+    <br>
     <form th:object="${memberDto}" method="post">
         <div class="d-grid gap-2 col-6 mx-auto">
             <label for="name" class="form-label">이름</label>
@@ -42,6 +43,7 @@
             <div class="col"></div>
         </div>
     </form>
-    <hr class="my-4">
+    <hr class="mt-4">
 </div>
 </body>
+</html>
