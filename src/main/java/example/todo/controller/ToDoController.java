@@ -62,6 +62,9 @@ public class ToDoController {
     @PostMapping("/todo/add")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult, HttpServletRequest request) {
 
+        if (!bindingResult.hasErrors() && toDoDto.getTitle().length() >= 20)
+            bindingResult.rejectValue("title", "length", "최대 20자까지 가능합니다.");
+
         if (bindingResult.hasErrors()) return "/todo/add";
 
         Optional<Member> findMember = memberService.findById(getSessionMember(request).getId());
@@ -87,6 +90,10 @@ public class ToDoController {
 
     @PostMapping("/todo/update/{id}")
     public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
+
+        if (!bindingResult.hasErrors() && toDoDto.getTitle().length() >= 20)
+            bindingResult.rejectValue("title", "length", "최대 20자까지 가능합니다.");
+
         if (bindingResult.hasErrors()) return "/todo/edit";
 
         if (id != null)
