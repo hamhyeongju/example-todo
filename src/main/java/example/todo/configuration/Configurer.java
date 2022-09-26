@@ -23,6 +23,6 @@ public class Configurer implements WebMvcConfigurer {
 
         registry.addInterceptor(new ToDoInterceptor(toDoService))
                 .order(2)
-                .addPathPatterns("/todo/update/**");
+                .addPathPatterns("/todo/update/**", "/todo/change/**", "/todo/delete/**");
     }
 }
