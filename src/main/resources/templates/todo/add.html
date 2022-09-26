@@ -11,6 +11,9 @@
         <form method="post" th:action="@{/todo/add}" th:object="${toDoDto}">
             <fieldset>
                 <legend class="text-center">일정 추가</legend>
+                <div>
+                    <br>
+                </div>
                 <div class="row">
                     <div class="col">
                         <label class="form-label" th:for="*{title}">제목</label>
@@ -24,9 +27,10 @@
                     </div>
                 </div>
                 <label class="form-label" th:for="*{description}">설명</label>
-                <input type="text" class="w-100 form-control" placeholder="최대 100자까지 가능합니다" th:field="*{description}"><br>
+                <textarea class="w-100 form-control" placeholder="최대 100자까지 가능합니다" th:field="*{description}">
+                </textarea>
                 <div th:errors="*{description}"></div>
-
+                <br>
                 <div class="row">
                     <div class="col-auto me-auto"></div>
                     <div class="col-auto">

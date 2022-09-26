@@ -44,18 +44,19 @@
                                 <form method="post" th:object="${toDoDto}">
                                     <td th:text="${todoStat.count}"></td>
                                     <td>
-                                        <input type="text" readonly name="title"
+                                        <input type="text" readonly name="title" class="form-control-plaintext"
                                                th:value="${todo.title}">
                                     </td>
-                                    <td>
-                                        <input type="text" readonly name="description"
-                                               th:value="${todo.description}">
+                                    <td class="col-4">
+                                        <textarea readonly name="description" class="form-control-plaintext"
+                                                  th:text="${todo.description}">
+                                        </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDate"
+                                        <input type="date" readonly name="createdDate" class="form-control-plaintext"
                                                th:value="${todo.createdDate}">
                                     <td>
-                                        <input type="date" readonly name="dueDate"
+                                        <input type="date" readonly name="dueDate" class="form-control-plaintext"
                                                th:value="${todo.dueDate}">
                                     </td>
                                     <td>
@@ -111,18 +112,19 @@
                                 <form method="post" th:object="${toDoDto}">
                                     <td th:text="${todoStat.count}"></td>
                                     <td>
-                                        <input type="text" readonly name="title"
+                                        <input type="text" readonly name="title" class="form-control-plaintext"
                                                th:value="${todo.title}">
                                     </td>
-                                    <td>
-                                        <input type="text" readonly name="description"
+                                    <td class="col-4">
+                                        <textarea readonly name="description" class="form-control-plaintext"
                                                th:value="${todo.description}">
+                                        </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDate"
+                                        <input type="date" readonly name="createdDate" class="form-control-plaintext"
                                                th:value="${todo.createdDate}">
                                     <td>
-                                        <input type="date" readonly name="dueDate"
+                                        <input type="date" readonly name="dueDate" class="form-control-plaintext"
                                                th:value="${todo.dueDate}">
                                     </td>
                                     <td>
