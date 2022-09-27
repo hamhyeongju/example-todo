@@ -5,6 +5,14 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
+<div>
+    <div class="col offset-10">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="col-auto btn btn-light">로그아웃</button>
+        </form>
+    </div>
+</div>
+
 <div class="container position-absolute top-50 start-50 translate-middle">
     <h1 class="text-center" th:text="|${session.loginMember.name}의 ToDo List|"></h1>
     <br>
@@ -117,7 +125,7 @@
                                     </td>
                                     <td class="col-4">
                                         <textarea readonly name="description" class="form-control-plaintext"
-                                               th:value="${todo.description}">
+                                                  th:value="${todo.description}">
                                         </textarea>
                                     </td>
                                     <td>
