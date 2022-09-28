@@ -6,6 +6,9 @@
 </head>
 
 <body>
+<div th:if="${session.loginMember}">
+    <div th:replace="~{header/logout :: logout}"></div>
+</div>
 <div class="container position-absolute top-50 start-50 translate-middle">
     <hr class="mb-4">
     <h2 class="text-center">홈 화면</h2>
