@@ -6,8 +6,7 @@
 </head>
 <body>
 <div th:replace="~{header/logout :: logout}"></div>
-
-<div class="container position-absolute top-50 start-50 translate-middle">
+<div class="px-5 gap-2 col mx-auto">
     <h1 class="text-center" th:text="|${session.loginMember.name}의 ToDo List|"></h1>
     <br>
 
@@ -131,6 +130,7 @@
                                     </td>
                                     <td>
                                     </td>
+                                    <td></td>
                                     <td>
                                         <button type="submit" class="btn btn-light"
                                                 th:formaction="@{/todo/change/{id} (id=${todo.id})}">취소
