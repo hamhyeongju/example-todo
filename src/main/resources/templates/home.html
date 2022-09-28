@@ -15,10 +15,15 @@
                 th:onclick="|location.href='@{/add}'|">
             회원 가입
         </button>
-        <button class="w-100 btn btn-secondary btn-lg"
+        <button class="w-100 btn btn-secondary btn-lg" th:unless="${session.loginMember}"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/login}'|" type="button">
             로그인
+        </button>
+        <button class="w-100 btn btn-secondary btn-lg" th:if="${session.loginMember}"
+                onclick="location.href='items.html'"
+                th:onclick="|location.href='@{/todo}'|" type="button">
+            할 일
         </button>
     </div>
     <hr class="mt-4">
