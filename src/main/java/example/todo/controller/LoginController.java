@@ -23,8 +23,9 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto) {
-        return "/login/form";
+    public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return session != null && session.getAttribute("loginMember") != null ? "redirect:/" : "/login/form";
     }
 
     @PostMapping("/login")
@@ -51,8 +52,7 @@ public class LoginController {
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("loginMember") != null)
-            session.invalidate();
+        if (session != null && session.getAttribute("loginMember") != null) session.invalidate();
 
         return "redirect:/";
     }
