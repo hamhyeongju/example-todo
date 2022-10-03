@@ -46,13 +46,17 @@ public class HomeController {
                 bindingResult.rejectValue("password", "password", "5~20자의 영문 소문자, 숫자만 사용 가능합니다. 공백은 허용되지 않습니다.");
             else if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
                 bindingResult.rejectValue("checkPassword", "", "비밀번호가 일치하지 않습니다.");
-
         }
 
         if (bindingResult.hasErrors()) return "/member/add";
 
         Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName().strip());
-        return memberService.save(member) != null ? "redirect:/" : "/member/add";
+        if (memberService.save(member) == null) {
+            bindingResult.rejectValue("loginId", "duplication", "이미 존재하는 ID 입니다.");
+            return "/member/add";
+        }
+        return "redirect:/";
+
     }
 
 
