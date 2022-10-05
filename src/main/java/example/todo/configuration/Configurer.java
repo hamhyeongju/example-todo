@@ -19,7 +19,7 @@ public class Configurer implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/login", "/add", "/error");
+                .excludePathPatterns("/", "/login", "/logout", "/add", "/error", "/css/**", "/js/**");
 
         registry.addInterceptor(new ToDoInterceptor(toDoService))
                 .order(2)
