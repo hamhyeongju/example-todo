@@ -3,10 +3,10 @@ package example.todo.Domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,7 +21,7 @@ public class ToDo {
 
     private Boolean isCompleted = false;
 
-    private LocalDate createdDate;
+    private LocalDateTime createdDateTime;
     private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,7 +32,7 @@ public class ToDo {
         ToDo toDo = new ToDo();
         toDo.title = title;
         toDo.description = description;
-        toDo.createdDate = LocalDate.now();
+        toDo.createdDateTime = LocalDateTime.now();
         toDo.dueDate = dueDate;
         if (member != null) toDo.configMember(member);
 

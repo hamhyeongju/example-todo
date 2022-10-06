@@ -54,8 +54,8 @@
                                         </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDate" class="form-control-plaintext"
-                                               th:value="${todo.createdDate}">
+                                        <input type="date" readonly name="createdDateTime" class="form-control-plaintext"
+                                               th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
                                     <td>
                                         <input type="date" readonly name="dueDate" class="form-control-plaintext"
                                                th:value="${todo.dueDate}">
@@ -122,8 +122,8 @@
                                         </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDate" class="form-control-plaintext"
-                                               th:value="${todo.createdDate}">
+                                        <input type="date" readonly name="createdDateTime" class="form-control-plaintext"
+                                               th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
                                     <td>
                                         <input type="date" readonly name="dueDate" class="form-control-plaintext"
                                                th:value="${todo.dueDate}">
