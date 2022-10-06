@@ -10,10 +10,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestURI = request.getRequestURI();
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loginMember") == null) {
-            response.sendRedirect("/login?redirectURL="+requestURI);
+            response.sendRedirect("/login?redirectURL="+ request.getRequestURI());
             return false;
         }
         return true;

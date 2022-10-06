@@ -50,7 +50,7 @@ public class ToDoController {
     }
 
     @GetMapping("/todo")
-    public String todo(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
+    public String todo() {
         return "/todo/main";
     }
 
