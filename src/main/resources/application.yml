@@ -7,10 +7,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create # 애플리케이션 시작 시 모든 table drop하고 새로 create / 개발 단계에서만 사용
+      ddl-auto: none # 애플리케이션 시작 시 모든 table drop하고 새로 create / 개발 단계에서만 사용
     properties:
       hibernate:
         format_sql: true # 표시되는 sql 정렬
+        order_by.default_null_ordering: last
 
 logging.level:
   org.hibernate.SQL: debug # sql 표시

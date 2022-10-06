@@ -3,6 +3,9 @@ package example.todo.service.todoService;
 import example.todo.Domain.ToDo;
 import example.todo.repository.ToDoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,5 +59,11 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
         return repository.findToDoListByMemberIdAndIsCompleted(id, isCompleted);
+    }
+
+    @Override
+    public List<ToDo> findSortByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
+        return repository.findSortByMemberIdAndIsCompleted(id, isCompleted,
+                Sort.by(Sort.Direction.ASC, "dueDate", "createdDateTime"));
     }
 }

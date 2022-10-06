@@ -1,6 +1,8 @@
 package example.todo.service.todoService;
 
 import example.todo.Domain.ToDo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,4 +24,7 @@ public interface ToDoService {
     void delete(ToDo toDo);
 
     List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
+
+    List<ToDo> findSortByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
+
 }
