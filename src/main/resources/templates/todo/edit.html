@@ -22,7 +22,7 @@
                     </div>
                     <div class="col">
                         <label class="form-label" th:for="*{dueDate}">마감일</label>
-                        <input type="date" class="w-100 form-control" th:field="*{dueDate}">
+                        <input type="date" class="w-100 form-control" name="dueDate" th:value="*{dueDate}">
                         <div th:errors="*{dueDate}"></div>
                     </div>
                 </div>
