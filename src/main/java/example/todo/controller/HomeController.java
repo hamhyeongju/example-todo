@@ -31,13 +31,13 @@ public class HomeController {
     public String save(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
 
         if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
-            bindingResult.rejectValue("checkPassword", "", "비밀번호가 일치하지 않습니다.");
+            bindingResult.rejectValue("checkPassword", "wrong");
 
         if (bindingResult.hasErrors()) return "/member/add";
 
         Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName().strip());
         if (memberService.save(member) == null) {
-            bindingResult.rejectValue("loginId", "duplication", "이미 존재하는 ID 입니다.");
+            bindingResult.reject("duplication");
             return "/member/add";
         }
         return "redirect:/";

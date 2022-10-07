@@ -39,7 +39,7 @@ public class LoginController {
         Optional<Member> loginMember = loginService.login(loginDto.getLoginId(), loginDto.getPassword());
 
         if (loginMember.isEmpty()) {
-            bindingResult.reject("loginFail", "id password 에러");
+            bindingResult.reject("loginFail");
             return "/login/form";
         }
 

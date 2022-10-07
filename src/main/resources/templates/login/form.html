@@ -12,9 +12,7 @@
     <br>
 
     <form th:object="${loginDto}" method="post">
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p>id 혹은 비밀번호가 정확하지 않습니다.</p>
-        </div>
+        <div th:if="${#fields.hasGlobalErrors()}" th:text="#{loginFail.loginDto}"></div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
             <label for="loginId" class="form-label">로그인 ID</label>

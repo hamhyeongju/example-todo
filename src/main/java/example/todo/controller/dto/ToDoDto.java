@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 public class ToDoDto {
 
     private Long id;
-    @NotEmpty
+    @Length(max = 20, min = 1, message = "{required.toDoDto.title}")
     private String title;
-    @Length(max = 100, message = "최대 100자까지 가능합니다")
+    @Length(max = 100, message = "{required.toDoDto.description}")
     private String description;
     private Boolean isCompleted;
     private LocalDateTime createdDateTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") @FutureOrPresent(message = "오늘 이전의 날짜는 선택할 수 없습니다.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") @FutureOrPresent(message = "{required.toDoDto.dueDate}")
     private LocalDate dueDate;
 
     public ToDoDto(Long id, String title, String description, Boolean isCompleted, LocalDateTime createdDateTime, LocalDate dueDate) {

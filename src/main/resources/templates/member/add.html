@@ -14,21 +14,23 @@
             <label for="name" class="form-label">이름</label>
             <input type="text" id="name" class="w-100 form-control"
                    placeholder="2~20자의 영문 소문자, 숫자, 한글만 사용 가능합니다. 앞뒤의 공백은 제거됩니다." th:field="*{name}">
-            <div th:errors="*{name}"></div>
+            <div th:if="${#fields.hasErrors('name')}" th:text="#{required.memberDto.name}"></div>
 
             <label for="loginId" class="form-label">로그인 id</label>
             <input type="text" id="loginId" class="w-100 form-control"
                    placeholder="5~20자의 영문 소문자, 숫자만 사용 가능합니다. 공백은 허용되지 않습니다." th:field="*{loginId}">
-            <div th:errors="*{loginId}"></div>
+            <div th:if="${#fields.hasErrors('loginId')}" th:text="#{required.memberDto.loginId}"></div>
+            <div th:if="${#fields.hasGlobalErrors()}" th:text="#{duplication.memberDto}"></div>
 
             <label for="password" class="form-label">비밀번호</label>
             <input type="password" id="password" class="w-100 form-control"
                    placeholder="5~20자의 영문 소문자, 숫자만 사용 가능합니다. 공백은 허용되지 않습니다." th:field="*{password}">
-            <div th:errors="*{password}"></div>
+            <div th:if="${#fields.hasErrors('password')}" th:text="#{required.memberDto.password}"></div>
 
             <label for="checkPassword" class="form-label">비밀번호 확인</label>
             <input type="password" id="checkPassword" class="w-100 form-control" th:field="*{checkPassword}">
             <div th:errors="*{checkPassword}"></div>
+
         </div>
 
         <div class="m-5 row">
