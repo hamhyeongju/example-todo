@@ -30,18 +30,8 @@ public class HomeController {
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
 
-        if (!bindingResult.hasFieldErrors("name") && !validateKorean(memberDto.getName()))
-            bindingResult.rejectValue("name", "name", "2~20자의 영문 소문자, 숫자, 한글만 사용 가능합니다. 앞뒤의 공백은 제거됩니다.");
-
-        if (!bindingResult.hasFieldErrors("loginId") && !validateString(memberDto.getLoginId()))
-            bindingResult.rejectValue("loginId", "loginId", "5~20자의 영문 소문자, 숫자만 사용 가능합니다. 공백은 허용되지 않습니다.");
-
-        if (!bindingResult.hasFieldErrors("password")) {
-            if (!validateString(memberDto.getPassword()))
-                bindingResult.rejectValue("password", "password", "5~20자의 영문 소문자, 숫자만 사용 가능합니다. 공백은 허용되지 않습니다.");
-            else if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
-                bindingResult.rejectValue("checkPassword", "", "비밀번호가 일치하지 않습니다.");
-        }
+        if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
+            bindingResult.rejectValue("checkPassword", "", "비밀번호가 일치하지 않습니다.");
 
         if (bindingResult.hasErrors()) return "/member/add";
 
