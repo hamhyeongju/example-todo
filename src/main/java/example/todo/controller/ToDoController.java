@@ -51,17 +51,17 @@ public class ToDoController {
 
     @GetMapping("/todo")
     public String todo() {
-        return "/todo/main";
+        return "todo/main";
     }
 
     @GetMapping("/todo/add")
     public String addForm(@ModelAttribute("toDoDto") ToDoDto toDoDto) {
-        return "/todo/add";
+        return "todo/add";
     }
 
     @PostMapping("/todo/add")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) return "/todo/add";
+        if (bindingResult.hasErrors()) return "todo/add";
 
         Optional<Member> findMember = memberService.findById(getSessionMember(request).getId());
         Optional<ToDo> createToDo = findMember.map(member -> ToDo.createToDo(
@@ -81,12 +81,12 @@ public class ToDoController {
             return "redirect:/todo";
         }
 
-        return "/todo/edit";
+        return "todo/edit";
     }
 
     @PostMapping("/todo/update/{id}")
     public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "/todo/edit";
+        if (bindingResult.hasErrors()) return "todo/edit";
 
         if (id != null)
             toDoService.update(id, toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate());

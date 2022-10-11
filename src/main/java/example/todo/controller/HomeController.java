@@ -24,7 +24,7 @@ public class HomeController {
 
     @GetMapping("/add")
     public String addForm(@ModelAttribute("memberDto") MemberDto memberDto) {
-        return "/member/add";
+        return "member/add";
     }
 
     @PostMapping("/add")
@@ -33,12 +33,12 @@ public class HomeController {
         if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
             bindingResult.rejectValue("checkPassword", "wrong");
 
-        if (bindingResult.hasErrors()) return "/member/add";
+        if (bindingResult.hasErrors()) return "member/add";
 
         Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName().strip());
         if (memberService.save(member) == null) {
             bindingResult.reject("duplication");
-            return "/member/add";
+            return "member/add";
         }
         return "redirect:/";
 

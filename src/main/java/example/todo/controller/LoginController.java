@@ -25,7 +25,7 @@ public class LoginController {
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        return session != null && session.getAttribute("loginMember") != null ? "redirect:/" : "/login/form";
+        return session != null && session.getAttribute("loginMember") != null ? "redirect:/" : "login/form";
     }
 
     @PostMapping("/login")
@@ -33,14 +33,14 @@ public class LoginController {
                         @RequestParam(defaultValue = "/todo") String redirectURL,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/login/form";
+            return "login/form";
         }
 
         Optional<Member> loginMember = loginService.login(loginDto.getLoginId(), loginDto.getPassword());
 
         if (loginMember.isEmpty()) {
             bindingResult.reject("loginFail");
-            return "/login/form";
+            return "login/form";
         }
 
         HttpSession session = request.getSession();
