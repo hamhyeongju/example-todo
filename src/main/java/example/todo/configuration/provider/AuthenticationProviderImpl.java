@@ -1,5 +1,6 @@
 package example.todo.configuration.provider;
 
+import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
