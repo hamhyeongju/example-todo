@@ -41,7 +41,7 @@ public class Configurer implements WebMvcConfigurer {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/css/**", "/js/**");
+        return (web) -> web.ignoring().antMatchers();
     }
 
     @Bean // 비밀번호 암호화 할때 사용할 BCrypthPasswordEncoder 를 빈으로 등록
