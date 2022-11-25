@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -24,7 +25,7 @@ public class Configurer implements WebMvcConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable().authorizeRequests()
-                .antMatchers("/", "/login", "/add", "/error", "/css/**", "/js/**").permitAll()
+                .antMatchers("/", "/login", "/add", "/error").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
@@ -36,6 +37,12 @@ public class Configurer implements WebMvcConfigurer {
 
         return http.build();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/css/**", "/js/**");
+    }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
