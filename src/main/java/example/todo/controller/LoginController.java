@@ -2,6 +2,7 @@ package example.todo.controller;
 
 import example.todo.Domain.Member;
 import example.todo.controller.dto.LoginDto;
+import example.todo.controller.dto.MemberSessionDto;
 import example.todo.service.LoginService.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,11 @@ public class LoginController {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", loginMember.get());
+        session.setAttribute("loginMember", new MemberSessionDto(
+                loginMember.get().getLoginId(),
+                loginMember.get().getPassword(),
+                loginMember.get().getName()
+        ));
 
         return "redirect:" + redirectURL;
     }

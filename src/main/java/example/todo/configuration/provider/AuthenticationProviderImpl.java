@@ -1,5 +1,8 @@
 package example.todo.configuration.provider;
 
+import example.todo.Domain.Member;
+import example.todo.controller.dto.MemberDto;
+import example.todo.controller.dto.MemberSessionDto;
 import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 
     private final UserDetailsService service;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final HttpSession session;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -33,6 +37,12 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
         if (!bCryptPasswordEncoder.matches(password, loginMember.getPassword())) {
             throw new BadCredentialsException(loginMember.getUsername() + " 비밀번호를 확인해주세요.");
         }
+
+        session.setAttribute("loginMember", new MemberSessionDto(
+                loginMember.getMember().getLoginId(),
+                loginMember.getMember().getPassword(),
+                loginMember.getMember().getName()
+        ));
 
         return new UsernamePasswordAuthenticationToken(loginMember, password, loginMember.getAuthorities());
     }
