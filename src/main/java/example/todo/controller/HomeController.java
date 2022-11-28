@@ -35,8 +35,7 @@ public class HomeController {
 
         if (bindingResult.hasErrors()) return "member/add";
 
-        Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName().strip());
-        if (memberService.save(member) == null) {
+        if (memberService.saveBySecurity(memberDto) == null) {
             bindingResult.reject("duplication");
             return "member/add";
         }
