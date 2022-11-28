@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -119,7 +118,7 @@
                                     </td>
                                     <td class="col-4">
                                         <textarea readonly name="description" class="form-control-plaintext"
-                                                  th:value="${todo.description}">
+                                                  th:text="${todo.description}">
                                         </textarea>
                                     </td>
                                     <td>
