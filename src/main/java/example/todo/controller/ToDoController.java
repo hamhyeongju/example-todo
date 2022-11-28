@@ -4,8 +4,10 @@ import example.todo.Domain.Member;
 import example.todo.Domain.ToDo;
 import example.todo.controller.dto.ToDoDto;
 import example.todo.service.memberService.MemberService;
+import example.todo.service.securityService.UserDetailsImpl;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,18 +30,18 @@ public class ToDoController {
     private final MemberService memberService;
 
     @ModelAttribute("toDoDtos")
-    public List<ToDoDto> toDoDtos(HttpServletRequest request) {
-        return getToDoDtos(getSessionMember(request), false);
+    public List<ToDoDto> toDoDtos(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return getToDoDtos(userDetails.getMember(), false);
     }
 
     @ModelAttribute("completedDtos")
-    public List<ToDoDto> completedDtos(HttpServletRequest request) {
-        return getToDoDtos(getSessionMember(request), true);
+    public List<ToDoDto> completedDtos(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return getToDoDtos(userDetails.getMember(), true);
     }
 
-    private static Member getSessionMember(HttpServletRequest request) {
-        return (Member) request.getSession().getAttribute("loginMember");
-    }
+//    private static Member getSessionMember(HttpServletRequest request) {
+//        return (Member) request.getSession().getAttribute("loginMember");
+//    }
 
     private List<ToDoDto> getToDoDtos(Member loginMember, Boolean isCompleted) {
         List<ToDo> list = toDoService.findSortByMemberIdAndIsCompleted(loginMember.getId(), isCompleted);
@@ -60,10 +62,11 @@ public class ToDoController {
     }
 
     @PostMapping("/todo/add")
-    public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult, HttpServletRequest request) {
+    public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult,
+                          @AuthenticationPrincipal UserDetailsImpl userDetails) {
         if (bindingResult.hasErrors()) return "todo/add";
 
-        Optional<Member> findMember = memberService.findById(getSessionMember(request).getId());
+        Optional<Member> findMember = memberService.findById(userDetails.getMember().getId());
         Optional<ToDo> createToDo = findMember.map(member -> ToDo.createToDo(
                 toDoDto.getTitle(), toDoDto.getDescription(), toDoDto.getDueDate(),
                 member));

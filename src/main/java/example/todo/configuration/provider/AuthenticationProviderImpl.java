@@ -38,12 +38,6 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
             throw new BadCredentialsException(loginMember.getUsername() + " 비밀번호를 확인해주세요.");
         }
 
-        session.setAttribute("loginMember", new MemberSessionDto(
-                loginMember.getMember().getLoginId(),
-                loginMember.getMember().getPassword(),
-                loginMember.getMember().getName()
-        ));
-
         return new UsernamePasswordAuthenticationToken(loginMember, password, loginMember.getAuthorities());
     }
 
