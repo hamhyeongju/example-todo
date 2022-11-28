@@ -16,8 +16,8 @@
 
         <div class="d-grid gap-2 col-6 mx-auto">
             <label for="loginId" class="form-label">로그인 ID</label>
-            <input type="text" id="loginId" class="w-100 form-control" th:field="*{loginId}">
-            <div th:errors="*{loginId}"></div>
+            <input type="text" id="loginId" class="w-100 form-control" th:field="*{username}">
+            <div th:errors="*{username}"></div>
 
             <label for="password" class="form-label">비밀번호</label>
             <input type="password" id="password" class="w-100 form-control" th:field="*{password}">
