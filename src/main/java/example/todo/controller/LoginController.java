@@ -29,7 +29,7 @@ public class LoginController {
         return session != null && session.getAttribute("loginMember") != null ? "redirect:/" : "login/form";
     }
 
-    @PostMapping("/login")
+//    @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/todo") String redirectURL,
                         HttpServletRequest request) {
@@ -54,7 +54,7 @@ public class LoginController {
         return "redirect:" + redirectURL;
     }
 
-    @PostMapping("/logout")
+//    @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("loginMember") != null) session.invalidate();
