@@ -27,7 +27,7 @@ public class Configurer implements WebMvcConfigurer {
         http
                 .csrf().disable().authorizeRequests()
                 .antMatchers("/", "/login", "/add", "/error", "/css/**", "/js/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/todo/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -51,10 +51,10 @@ public class Configurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor())
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/", "/login", "/logout", "/add", "/error", "/css/**", "/js/**");
+//        registry.addInterceptor(new LoginInterceptor())
+//                .order(1)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/", "/login", "/logout", "/add", "/error", "/css/**", "/js/**");
 
         registry.addInterceptor(new ToDoInterceptor(toDoService))
                 .order(2)

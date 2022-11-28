@@ -3,8 +3,11 @@ package example.todo.controller;
 import example.todo.Domain.Member;
 import example.todo.controller.dto.MemberDto;
 import example.todo.service.memberService.MemberService;
+import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,8 @@ public class HomeController {
     private final MemberService memberService;
 
     @GetMapping("/")
-    public String home() {
+    public String home(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        if (userDetails != null) model.addAttribute("loginStatus", true);
         return "home";
     }
 
@@ -35,6 +39,7 @@ public class HomeController {
 
         if (bindingResult.hasErrors()) return "member/add";
 
+//        Member member = new Member(memberDto.getLoginId(), memberDto.getPassword(), memberDto.getName().strip());
         if (memberService.saveBySecurity(memberDto) == null) {
             bindingResult.reject("duplication");
             return "member/add";

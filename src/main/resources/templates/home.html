@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div th:if="${session.loginMember}">
+<div th:if="${loginStatus}">
     <div th:replace="~{header/logout :: logout}"></div>
 </div>
 <div class="container position-absolute top-50 start-50 translate-middle">
@@ -18,12 +18,12 @@
                 th:onclick="|location.href='@{/add}'|">
             회원 가입
         </button>
-        <button class="w-100 btn btn-secondary btn-lg" th:unless="${session.loginMember}"
+        <button class="w-100 btn btn-secondary btn-lg" th:unless="${loginStatus}"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/login}'|" type="button">
             로그인
         </button>
-        <button class="w-100 btn btn-secondary btn-lg" th:if="${session.loginMember}"
+        <button class="w-100 btn btn-secondary btn-lg" th:if="${loginStatus}"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/todo}'|" type="button">
             할 일

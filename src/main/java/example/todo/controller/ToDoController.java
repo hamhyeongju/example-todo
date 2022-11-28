@@ -8,6 +8,7 @@ import example.todo.service.securityService.UserDetailsImpl;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,11 @@ public class ToDoController {
 
     private final ToDoService toDoService;
     private final MemberService memberService;
+
+    @ModelAttribute("userDetails")
+    public UserDetailsImpl userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return userDetails;
+    }
 
     @ModelAttribute("toDoDtos")
     public List<ToDoDto> toDoDtos(@AuthenticationPrincipal UserDetailsImpl userDetails) {
