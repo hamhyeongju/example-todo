@@ -15,4 +15,6 @@ public interface MemberService {
     List<Member> findAll();
 
     Optional<Member> findById(Long id);
+
+    Optional<Member> findByLoginId(String loginId);
 }
