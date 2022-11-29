@@ -23,6 +23,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<ToDo> toDoList = new ArrayList<>();
 
+    public void setEncodingPassword(String password) {
+        this.password = password;
+    }
+
     public Member(String loginId, String password, String name) {
         this.loginId = loginId;
         this.password = password;

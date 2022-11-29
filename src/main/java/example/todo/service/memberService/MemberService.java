@@ -10,8 +10,6 @@ public interface MemberService {
 
     Long save(Member member);
 
-    Long saveBySecurity(MemberDto memberDto);
-
     List<Member> findAll();
 
     Optional<Member> findById(Long id);
