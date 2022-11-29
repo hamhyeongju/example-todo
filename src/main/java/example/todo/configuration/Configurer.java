@@ -25,23 +25,23 @@ public class Configurer implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable().authorizeRequests()
-                .antMatchers("/", "/login", "/add", "/error", "/css/**", "/js/**").permitAll()
-                .antMatchers("/todo/**").authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/todo")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/");
+                    .csrf().disable().authorizeRequests()
+                    .antMatchers("/", "/login", "/add", "/error").permitAll()
+                    .antMatchers("/todo/**").authenticated()
+                    .and()
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/todo")
+                    .and()
+                    .logout()
+                    .logoutSuccessUrl("/");
 
         return http.build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers();
+        return (web) -> web.ignoring().antMatchers("/css/**", "/js/**");
     }
 
     @Bean // 비밀번호 암호화 할때 사용할 BCrypthPasswordEncoder 를 빈으로 등록
