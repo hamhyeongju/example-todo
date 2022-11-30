@@ -23,6 +23,7 @@ https://hhj-todo.herokuapp.com/ 에서 사용해 보실 수 있습니다. (herok
 * Validation 
 * Thymeleaf
 * Lombok
+* Spring Security
 
 heroku에 배포 시에는 heroku 내장 db(JawsDB MySQL)를 사용하였습니다.<br>
 디자인에 사용한 css와 js는 부트스트랩을 활용하였습니다.
