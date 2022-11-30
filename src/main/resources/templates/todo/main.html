@@ -42,7 +42,7 @@
 
                             <tbody>
                             <tr th:each="todo : ${toDoDtos}">
-                                <form method="post">
+                                <form method="post" th:action>
                                     <td th:text="${todoStat.count}"></td>
                                     <td>
                                         <input type="text" readonly name="title" class="form-control-plaintext"
@@ -110,7 +110,7 @@
 
                             <tbody>
                             <tr th:each="todo : ${completedDtos}">
-                                <form method="post">
+                                <form method="post" th:action>
                                     <td th:text="${todoStat.count}"></td>
                                     <td>
                                         <input type="text" readonly name="title" class="form-control-plaintext"

@@ -25,16 +25,17 @@ public class Configurer implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                    .csrf().disable().authorizeRequests()
-                    .antMatchers("/", "/login", "/add", "/error").permitAll()
-                    .antMatchers("/todo/**").authenticated()
-                    .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/todo")
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl("/");
+//                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/login", "/add", "/error").permitAll()
+                .antMatchers("/todo/**").authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/todo")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/");
 
         return http.build();
     }

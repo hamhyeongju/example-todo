@@ -11,7 +11,7 @@
     <h2 class="text-center">로그인</h2>
     <br>
 
-    <form th:object="${loginDto}" method="post">
+    <form th:object="${loginDto}" method="post" th:action="@{/login}">
         <div th:if="${#fields.hasGlobalErrors()}" th:text="#{loginFail.loginDto}"></div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
