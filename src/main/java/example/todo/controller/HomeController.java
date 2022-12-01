@@ -3,9 +3,9 @@ package example.todo.controller;
 import example.todo.Domain.Member;
 import example.todo.controller.dto.MemberDto;
 import example.todo.service.memberService.MemberService;
-import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +21,7 @@ public class HomeController {
     private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         if (userDetails != null) model.addAttribute("loginStatus", true);
         return "home";
     }
