@@ -35,20 +35,6 @@ public class ToDoController {
         return userDetails;
     }
 
-    @ModelAttribute("toDoDtos")
-    public List<ToDoDto> toDoDtos(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return getToDoDtos(userDetails.getMember(), false);
-    }
-
-    @ModelAttribute("completedDtos")
-    public List<ToDoDto> completedDtos(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return getToDoDtos(userDetails.getMember(), true);
-    }
-
-//    private static Member getSessionMember(HttpServletRequest request) {
-//        return (Member) request.getSession().getAttribute("loginMember");
-//    }
-
     private List<ToDoDto> getToDoDtos(Member loginMember, Boolean isCompleted) {
         List<ToDo> list = toDoService.findSortByMemberIdAndIsCompleted(loginMember.getId(), isCompleted);
         return list.stream().map(toDo ->
@@ -58,7 +44,10 @@ public class ToDoController {
     }
 
     @GetMapping("/todo")
-    public String todo() {
+    public String todo(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        model.addAttribute("toDoDtos", getToDoDtos(userDetails.getMember(), false));
+        model.addAttribute("completedDtos", getToDoDtos(userDetails.getMember(), true));
+
         return "todo/main";
     }
 
