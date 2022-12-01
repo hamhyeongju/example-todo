@@ -4,7 +4,9 @@ import example.todo.Domain.Member;
 import example.todo.controller.dto.LoginDto;
 import example.todo.controller.dto.MemberSessionDto;
 import example.todo.service.LoginService.LoginService;
+import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,10 +27,11 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        return session != null && session.getAttribute("loginMember") != null ? "redirect:/" : "login/form";
+    public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto,
+                            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return (userDetails == null) ? "login/form" : "redirect:/";
     }
+
 
 //    @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
