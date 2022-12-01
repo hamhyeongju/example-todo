@@ -23,8 +23,7 @@ public class MemberSecurityService  implements MemberService {
     public Long save(Member member) {
         member.setEncodingPassword(bCryptPasswordEncoder.encode(member.getPassword()));
         // loginId 중복 체크
-        return repository.findByLoginId(member.getLoginId()).isEmpty()
-                ? repository.save(member).getId() : null;
+        return repository.existsByLoginId(member.getLoginId()) ?  null : repository.save(member).getId();
     }
 
     @Override
