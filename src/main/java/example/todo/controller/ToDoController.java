@@ -36,7 +36,7 @@ public class ToDoController {
     }
 
     private List<ToDoDto> getToDoDtos(Member loginMember, Boolean isCompleted) {
-        List<ToDo> list = toDoService.findSortByMemberIdAndIsCompleted(loginMember.getId(), isCompleted);
+        List<ToDo> list = toDoService.findJPQLByMemberIdAndIsCompleted(loginMember.getId(), isCompleted);
         return list.stream().map(toDo ->
                         new ToDoDto(toDo.getId(), toDo.getTitle(), toDo.getDescription(),
                                 toDo.getIsCompleted(), toDo.getCreatedDateTime(), toDo.getDueDate()))

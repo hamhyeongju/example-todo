@@ -24,4 +24,7 @@ public interface ToDoService {
 
     List<ToDo> findSortByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
 
+    List<ToDo> findJPQLByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
+
+
 }

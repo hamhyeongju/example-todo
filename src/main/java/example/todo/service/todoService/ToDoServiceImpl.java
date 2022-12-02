@@ -64,4 +64,9 @@ public class ToDoServiceImpl implements ToDoService {
         return repository.findSortByMemberIdAndIsCompleted(id, isCompleted,
                 Sort.by(Sort.Direction.ASC, "dueDate", "createdDateTime"));
     }
+
+    @Override
+    public List<ToDo> findJPQLByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
+        return repository.findJPQLByMemberIdAnAndIsCompleted(id, isCompleted);
+    }
 }
