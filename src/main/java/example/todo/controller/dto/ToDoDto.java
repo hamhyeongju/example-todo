@@ -6,10 +6,13 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * @brief ToDo 생성, 수정 시 사용되는 dto
+ * @details Bean Validation 으로 값 검증
+ */
 @Getter @Setter
 public class ToDoDto {
 
@@ -20,6 +23,10 @@ public class ToDoDto {
     private String description;
     private Boolean isCompleted;
     private LocalDateTime createdDateTime;
+
+    /**
+     * @FutureOrPresent : 과거의 날짜는 선택할 수 없음
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd") @FutureOrPresent(message = "{required.toDoDto.dueDate}")
     private LocalDate dueDate;
 

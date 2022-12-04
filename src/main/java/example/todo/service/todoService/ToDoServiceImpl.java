@@ -29,11 +29,13 @@ public class ToDoServiceImpl implements ToDoService {
         return repository.findById(id);
     }
 
-    @Override
-    public List<ToDo> findAll() {
-        return repository.findAll();
-    }
-
+    /**
+     * @brief ToDo 수정
+     * @param id todo pk
+     * @param title modified title
+     * @param description modified description
+     * @param dueDate modified dueDate
+     */
     @Override
     @Transactional
     public void update(Long id, String title, String description, LocalDate dueDate) {
@@ -41,6 +43,10 @@ public class ToDoServiceImpl implements ToDoService {
         toDo.ifPresent(t -> t.update(title, description, dueDate));
     }
 
+    /**
+     * @brief ToDo 완료 상태 변경
+     * @param id
+     */
     @Override
     @Transactional
     public void changeStatus(Long id) {
@@ -54,17 +60,28 @@ public class ToDoServiceImpl implements ToDoService {
         repository.delete(toDo);
     }
 
+    /**
+     * @brief 회원이 가진 ToDo를 list로 조회
+     * @deprecated 정렬 기능이 포함된 findSortByMemberIdAndIsCompleted() 로 대체
+     */
     @Override
     public List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
         return repository.findToDoListByMemberIdAndIsCompleted(id, isCompleted);
     }
 
+    /**
+     * @brief 회원이 가진 ToDo를 정렬하여 list로 조회
+     * @deprecated Spring Data JPA 쿼리 메서드 사용 시 Join 발생하여 findJPQLByMemberIdAndIsCompleted() 로 대체
+     */
     @Override
     public List<ToDo> findSortByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
         return repository.findSortByMemberIdAndIsCompleted(id, isCompleted,
                 Sort.by(Sort.Direction.ASC, "dueDate", "createdDateTime"));
     }
 
+    /**
+     * @brief 회원이 가진 ToDo를 정렬하여 JPQL로 조회
+     */
     @Override
     public List<ToDo> findJPQLByMemberIdAndIsCompleted(Long id, Boolean isCompleted) {
         return repository.findJPQLByMemberIdAnAndIsCompleted(id, isCompleted);

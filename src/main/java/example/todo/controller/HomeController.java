@@ -14,12 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * @brief "/", "/add" 경로의 요청을 처리하는 컨트롤러
+ * @details 첫 화면과 회원 가입 화면, 회원 가입 요청 처리
+ */
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
     private final MemberService memberService;
 
+    /**
+     * @details 로그인 사용자라면 화면에서 로그아웃 버튼을 출력하기 위해 UserDetails 포함
+     */
     @GetMapping("/")
     public String home(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         if (userDetails != null) model.addAttribute("loginStatus", true);
@@ -31,6 +38,11 @@ public class HomeController {
         return "member/add";
     }
 
+    /**
+     * @brief 회원 가입 기능
+     * @details Bean Validation 으로 1차 검증 후 password.equals(checkPassword), loginId 중복 여부 검증
+     * @return
+     */
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
 
@@ -45,12 +57,12 @@ public class HomeController {
             return "member/add";
         }
         return "redirect:/";
-
     }
 
 
     /**
-     * str이 영소문자나 숫자로 구성되면 true
+     * @brief str이 영소문자나 숫자로 구성되면 true
+     * @deprecated Bean Validation @Pattern으로 대체
      */
     private boolean validateString(String str) {
         String temp = "";
@@ -64,7 +76,8 @@ public class HomeController {
     }
 
     /**
-     * str이 영소문자나 한글 숫자 공백으로 구성되면 true
+     * @brief str이 영소문자나 한글 숫자 공백으로 구성되면 true
+     * @deprecated Bean Validation @Pattern으로 대체
      */
     private boolean validateKorean(String str) {
         String temp = "";

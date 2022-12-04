@@ -59,27 +59,4 @@ class MemberRepositoryTest {
 
     }
 
-    @Test
-    @Transactional
-    public void findAll() throws Exception {
-        //given
-        Member member1 = new Member("111", "222", "member1");
-        Member member2 = new Member("333", "444", "member2");
-        Member member3 = new Member("555", "666", "member3");
-        Long savedId1 = service.save(member1);
-        Long savedId2= service.save(member2);
-        Long savedId3 = service.save(member3);
-
-        //when
-        List<Member> list = service.findAll();
-
-        //then
-        assertThat(list.size()).isEqualTo(3);
-        assertThat(list).contains(
-                service.findById(savedId1).get(),
-                service.findById(savedId2).get(),
-                service.findById(savedId3).get());
-    }
-
-
 }

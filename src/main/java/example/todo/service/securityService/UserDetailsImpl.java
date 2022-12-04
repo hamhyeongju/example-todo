@@ -9,6 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * @brief 회원 인증(Authentication)을 위한 객체
+ * @field Member Entity
+ */
 @AllArgsConstructor
 @Getter
 public class UserDetailsImpl implements UserDetails {

@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * @brief ToDo Entity
+ * @details ToDo N:1 Member
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -49,6 +53,10 @@ public class ToDo {
         this.dueDate = dueDate;
     }
 
+    /**
+     * 연관관계 설정 메서드
+     * @param member
+     */
     private void configMember(Member member) {
         this.member = member;
         member.getToDoList().add(this);

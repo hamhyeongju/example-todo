@@ -8,7 +8,6 @@ import example.todo.service.securityService.UserDetailsImpl;
 import example.todo.service.todoService.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @brief "/todo/**" 경로의 요청을 처리하는 컨트롤러
+ * @details ToDo CRUD 관련 요청 처리
+ */
 @Controller
 @RequiredArgsConstructor
 public class ToDoController {
@@ -35,6 +37,9 @@ public class ToDoController {
         return userDetails;
     }
 
+    /**
+     * @brief 요청한 member의 todo를 list로 조회 후 dto 변환
+     */
     private List<ToDoDto> getToDoDtos(Member loginMember, Boolean isCompleted) {
         List<ToDo> list = toDoService.findJPQLByMemberIdAndIsCompleted(loginMember.getId(), isCompleted);
         return list.stream().map(toDo ->
@@ -56,6 +61,9 @@ public class ToDoController {
         return "todo/add";
     }
 
+    /**
+     * @brief ToDo Create
+     */
     @PostMapping("/todo/add")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult,
                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -82,6 +90,9 @@ public class ToDoController {
         return "todo/edit";
     }
 
+    /**
+     * @brief ToDo Update
+     */
     @PostMapping("/todo/update/{id}")
     public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "todo/edit";
@@ -91,12 +102,18 @@ public class ToDoController {
         return "redirect:/todo";
     }
 
+    /**
+     * ToDo 완료 여부 변경
+     */
     @PostMapping("/todo/change/{id}")
     public String change(@PathVariable Long id) {
         if (id != null) toDoService.changeStatus(id);
         return "redirect:/todo";
     }
 
+    /**
+     * ToDo Delete
+     */
     @PostMapping("/todo/delete/{id}")
     public String delete(@PathVariable Long id) {
         if (id != null) toDoService.findById(id).ifPresent(toDo -> toDoService.delete(toDo));

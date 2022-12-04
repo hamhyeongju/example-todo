@@ -1,11 +1,7 @@
 package example.todo.configuration.provider;
 
-import example.todo.Domain.Member;
-import example.todo.controller.dto.MemberDto;
-import example.todo.controller.dto.MemberSessionDto;
 import example.todo.service.securityService.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,21 +13,24 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * @brief Spring-Security 에서 로그인 시 사용하는 Provider 구현체
+ */
 @RequiredArgsConstructor
 @Component
 public class AuthenticationProviderImpl implements AuthenticationProvider {
 
     private final UserDetailsService service;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final HttpSession session;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // DB 에서 사용자 정보가 실제로 유효한지 확인 후 인증된 Authentication 리턴
+        // DB 에서 사용자 정보가 실제로 유효한지 확인 후 인증된 Authentication 반환
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication; // AuthenticaionFilter에서 생성된 토큰으로부터 아이디와 비밀번호를 조회함
         String username = token.getName();
-        String password = (String) token.getCredentials(); // UserDetailsService를 통해 DB에서 아이디로 사용자 조회
+        String password = (String) token.getCredentials();
 
+        // DB에서 username(loginId)로 조회
         UserDetailsImpl loginMember = (UserDetailsImpl) service.loadUserByUsername(username);
 
         if (!bCryptPasswordEncoder.matches(password, loginMember.getPassword())) {
