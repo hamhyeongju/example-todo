@@ -64,7 +64,7 @@ public class ToDoController {
     /**
      * @brief ToDo Create
      */
-    @PostMapping("/todo/add")
+    @PostMapping("/todo")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult,
                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
         if (bindingResult.hasErrors()) return "todo/add";
