@@ -54,7 +54,8 @@
                                         </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDateTime" class="form-control-plaintext"
+                                        <input type="date" readonly name="createdDateTime"
+                                               class="form-control-plaintext"
                                                th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
                                     <td>
                                         <input type="date" readonly name="dueDate" class="form-control-plaintext"
@@ -70,9 +71,11 @@
                                                 th:formaction="@{/todo/change/{id} (id=${todo.id})}">완료
                                         </button>
                                     </td>
+                                </form>
+                                <form th:action th:method="delete">
                                     <td>
                                         <button type="submit" class="btn btn-light"
-                                                th:formaction="@{/todo/delete/{id} (id=${todo.id})}">삭제
+                                                th:formaction="@{/todo/{id} (id=${todo.id})}">삭제
                                         </button>
                                     </td>
                                 </form>
@@ -122,7 +125,8 @@
                                         </textarea>
                                     </td>
                                     <td>
-                                        <input type="date" readonly name="createdDateTime" class="form-control-plaintext"
+                                        <input type="date" readonly name="createdDateTime"
+                                               class="form-control-plaintext"
                                                th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
                                     <td>
                                         <input type="date" readonly name="dueDate" class="form-control-plaintext"
@@ -136,9 +140,11 @@
                                                 th:formaction="@{/todo/change/{id} (id=${todo.id})}">취소
                                         </button>
                                     </td>
+                                </form>
+                                <form th:action th:method="delete">
                                     <td>
                                         <button type="submit" class="btn btn-light"
-                                                th:formaction="@{/todo/delete/{id} (id=${todo.id})}">삭제
+                                                th:formaction="@{/todo/{id} (id=${todo.id})}">삭제
                                         </button>
                                     </td>
                                 </form>

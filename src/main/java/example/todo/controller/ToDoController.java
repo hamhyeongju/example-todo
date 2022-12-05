@@ -111,7 +111,7 @@ public class ToDoController {
     /**
      * ToDo Delete
      */
-    @PostMapping("/todo/delete/{id}")
+    @DeleteMapping("/todo/{id}")
     public String delete(@PathVariable Long id) {
         if (id != null) toDoService.findById(id).ifPresent(toDo -> toDoService.delete(toDo));
         return "redirect:/todo";
