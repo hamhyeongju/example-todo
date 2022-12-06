@@ -66,9 +66,11 @@
                                                 th:onclick="|location.href='@{/todo/update/{id}(id=${todo.id})}'|">수정
                                         </button>
                                     </td>
+                                </form>
+                                <form th:action th:method="patch">
                                     <td>
                                         <button type="submit" class="btn btn-light"
-                                                th:formaction="@{/todo/change/{id} (id=${todo.id})}">완료
+                                                th:formaction="@{/todo/{id} (id=${todo.id})}">완료
                                         </button>
                                     </td>
                                 </form>
@@ -135,9 +137,11 @@
                                     <td>
                                     </td>
                                     <td></td>
+                                </form>
+                                <form th:action th:method="patch">
                                     <td>
                                         <button type="submit" class="btn btn-light"
-                                                th:formaction="@{/todo/change/{id} (id=${todo.id})}">취소
+                                                th:formaction="@{/todo/{id} (id=${todo.id})}">취소
                                         </button>
                                     </td>
                                 </form>

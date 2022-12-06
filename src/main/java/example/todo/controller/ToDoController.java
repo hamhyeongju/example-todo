@@ -102,7 +102,7 @@ public class ToDoController {
     /**
      * ToDo 완료 여부 변경
      */
-    @PostMapping("/todo/change/{id}")
+    @PatchMapping("/todo/{id}")
     public String change(@PathVariable Long id) {
         if (id != null) toDoService.changeStatus(id);
         return "redirect:/todo";
