@@ -61,7 +61,7 @@ public class ToDoController {
     /**
      * @brief ToDo Create
      */
-    @PostMapping("/todo")
+    @PostMapping("/todos")
     public String addToDo(@Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult,
                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
         if (bindingResult.hasErrors()) return "todo/add";
@@ -90,7 +90,7 @@ public class ToDoController {
     /**
      * @brief ToDo Update
      */
-    @PutMapping("/todo/{id}")
+    @PutMapping("/todos/{id}")
     public String update(@PathVariable Long id, @Validated @ModelAttribute("toDoDto") ToDoDto toDoDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "todo/edit";
 
@@ -102,7 +102,7 @@ public class ToDoController {
     /**
      * ToDo 완료 여부 변경
      */
-    @PatchMapping("/todo/{id}")
+    @PatchMapping("/todos/{id}")
     public String change(@PathVariable Long id) {
         if (id != null) toDoService.changeStatus(id);
         return "redirect:/todo";
@@ -111,7 +111,7 @@ public class ToDoController {
     /**
      * ToDo Delete
      */
-    @DeleteMapping("/todo/{id}")
+    @DeleteMapping("/todos/{id}")
     public String delete(@PathVariable Long id) {
         if (id != null) toDoService.findById(id).ifPresent(toDo -> toDoService.delete(toDo));
         return "redirect:/todo";

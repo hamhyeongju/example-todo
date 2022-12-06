@@ -43,7 +43,7 @@ public class HomeController {
      * @details Bean Validation 으로 1차 검증 후 password.equals(checkPassword), loginId 중복 여부 검증
      * @return
      */
-    @PostMapping("/member")
+    @PostMapping("/members")
     public String save(@Validated @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
 
         if (!memberDto.getPassword().equals(memberDto.getCheckPassword()))
