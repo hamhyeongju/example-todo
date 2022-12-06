@@ -42,31 +42,29 @@
 
                             <tbody>
                             <tr th:each="todo : ${toDoDtos}">
-                                <form method="post" th:action>
-                                    <td th:text="${todoStat.count}"></td>
-                                    <td>
-                                        <input type="text" readonly name="title" class="form-control-plaintext"
-                                               th:value="${todo.title}">
-                                    </td>
-                                    <td class="col-4">
+                                <td th:text="${todoStat.count}"></td>
+                                <td>
+                                    <input type="text" readonly name="title" class="form-control-plaintext"
+                                           th:value="${todo.title}">
+                                </td>
+                                <td class="col-4">
                                         <textarea readonly name="description" class="form-control-plaintext"
                                                   th:text="${todo.description}">
                                         </textarea>
-                                    </td>
-                                    <td>
-                                        <input type="date" readonly name="createdDateTime"
-                                               class="form-control-plaintext"
-                                               th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
-                                    <td>
-                                        <input type="date" readonly name="dueDate" class="form-control-plaintext"
-                                               th:value="${todo.dueDate}">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-light"
-                                                th:onclick="|location.href='@{/todo/update/{id}(id=${todo.id})}'|">수정
-                                        </button>
-                                    </td>
-                                </form>
+                                </td>
+                                <td>
+                                    <input type="date" readonly name="createdDateTime"
+                                           class="form-control-plaintext"
+                                           th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
+                                <td>
+                                    <input type="date" readonly name="dueDate" class="form-control-plaintext"
+                                           th:value="${todo.dueDate}">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-light"
+                                            th:onclick="|location.href='@{/todo/update/{id}(id=${todo.id})}'|">수정
+                                    </button>
+                                </td>
                                 <form th:action th:method="patch">
                                     <td>
                                         <button type="submit" class="btn btn-light"
@@ -115,29 +113,27 @@
 
                             <tbody>
                             <tr th:each="todo : ${completedDtos}">
-                                <form method="post" th:action>
-                                    <td th:text="${todoStat.count}"></td>
-                                    <td>
-                                        <input type="text" readonly name="title" class="form-control-plaintext"
-                                               th:value="${todo.title}">
-                                    </td>
-                                    <td class="col-4">
+                                <td th:text="${todoStat.count}"></td>
+                                <td>
+                                    <input type="text" readonly name="title" class="form-control-plaintext"
+                                           th:value="${todo.title}">
+                                </td>
+                                <td class="col-4">
                                         <textarea readonly name="description" class="form-control-plaintext"
                                                   th:text="${todo.description}">
                                         </textarea>
-                                    </td>
-                                    <td>
-                                        <input type="date" readonly name="createdDateTime"
-                                               class="form-control-plaintext"
-                                               th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
-                                    <td>
-                                        <input type="date" readonly name="dueDate" class="form-control-plaintext"
-                                               th:value="${todo.dueDate}">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td></td>
-                                </form>
+                                </td>
+                                <td>
+                                    <input type="date" readonly name="createdDateTime"
+                                           class="form-control-plaintext"
+                                           th:value="${#temporals.format(todo.getCreatedDateTime, 'yyyy-MM-dd')}">
+                                <td>
+                                    <input type="date" readonly name="dueDate" class="form-control-plaintext"
+                                           th:value="${todo.dueDate}">
+                                </td>
+                                <td>
+                                </td>
+                                <td></td>
                                 <form th:action th:method="patch">
                                     <td>
                                         <button type="submit" class="btn btn-light"
