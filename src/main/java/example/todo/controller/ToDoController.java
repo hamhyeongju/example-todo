@@ -29,11 +29,6 @@ public class ToDoController {
     private final ToDoService toDoService;
     private final MemberService memberService;
 
-    @ModelAttribute("userDetails")
-    public UserDetailsImpl userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return userDetails;
-    }
-
     /**
      * @brief 요청한 member의 todo를 list로 조회 후 dto 변환
      */
@@ -47,6 +42,7 @@ public class ToDoController {
 
     @GetMapping("/todo")
     public String todo(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        model.addAttribute("membername", userDetails.getMember().getName());
         model.addAttribute("toDoDtos", getToDoDtos(userDetails.getMember(), false));
         model.addAttribute("completedDtos", getToDoDtos(userDetails.getMember(), true));
 
