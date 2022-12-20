@@ -28,8 +28,7 @@ public class HomeController {
      * @details 로그인 사용자라면 화면에서 로그아웃 버튼을 출력하기 위해 UserDetails 포함
      */
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        if (userDetails != null) model.addAttribute("loginStatus", true);
+    public String home() {
         return "home";
     }
 

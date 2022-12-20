@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 </head>
 
 <body>
-<div th:if="${loginStatus}">
+<div sec:authorize="isAuthenticated()">
     <div th:replace="~{header/logout :: logout}"></div>
 </div>
 <div class="container position-absolute top-50 start-50 translate-middle">
@@ -18,12 +19,12 @@
                 th:onclick="|location.href='@{/add}'|">
             회원 가입
         </button>
-        <button class="w-100 btn btn-secondary btn-lg" th:unless="${loginStatus}"
+        <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAnonymous()"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/login}'|" type="button">
             로그인
         </button>
-        <button class="w-100 btn btn-secondary btn-lg" th:if="${loginStatus}"
+        <button class="w-100 btn btn-secondary btn-lg" sec:authorize="isAuthenticated()"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/todo}'|" type="button">
             할 일
