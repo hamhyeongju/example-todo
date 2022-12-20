@@ -113,7 +113,7 @@ public class ToDoController {
      */
     @DeleteMapping("/todos/{id}")
     public String delete(@PathVariable Long id) {
-        if (id != null) toDoService.findById(id).ifPresent(toDo -> toDoService.delete(toDo));
+        if (id != null) toDoService.delete(id);
         return "redirect:/todo";
     }
 }

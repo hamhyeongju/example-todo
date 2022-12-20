@@ -2,6 +2,7 @@ package example.todo.repository;
 
 import example.todo.Domain.Member;
 import example.todo.Domain.ToDo;
+import example.todo.service.memberService.MemberService;
 import example.todo.service.memberService.MemberServiceImpl;
 import example.todo.service.todoService.ToDoServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ToDoRepositoryTest {
 
     @Autowired
-    MemberServiceImpl memberService;
+    MemberService memberService;
     @Autowired
     ToDoServiceImpl toDoService;
 
@@ -50,7 +51,7 @@ class ToDoRepositoryTest {
         Long savedToDoId = toDoService.save(toDo);
 
         //when
-        toDoService.delete(toDo);
+        toDoService.delete(toDo.getId());
 
         //then
         Optional<ToDo> findToDo = toDoService.findById(savedToDoId);

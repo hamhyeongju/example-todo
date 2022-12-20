@@ -56,8 +56,8 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     @Transactional
-    public void delete(ToDo toDo) {
-        repository.delete(toDo);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     /**

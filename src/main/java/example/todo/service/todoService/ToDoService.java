@@ -19,7 +19,7 @@ public interface ToDoService {
 
     void changeStatus(Long id);
 
-    void delete(ToDo toDo);
+    void delete(Long id);
 
     List<ToDo> findToDoListByMemberIdAndIsCompleted(Long id, Boolean isCompleted);
 
