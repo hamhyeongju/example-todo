@@ -66,6 +66,6 @@ public class Configurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ToDoInterceptor(toDoService))
                 .order(2)
-                .addPathPatterns("/todo/update/**", "/todo/change/**", "/todo/delete/**");
+                .addPathPatterns("/todo/update/**", "/todos/{id}");
     }
 }
