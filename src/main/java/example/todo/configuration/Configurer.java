@@ -29,17 +29,17 @@ public class Configurer implements WebMvcConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 //                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/login", "/add", "/error").permitAll()
-                .antMatchers("/todo/**").authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/todo")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/");
-
+                .authorizeHttpRequests(
+                        authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                                .requestMatchers("/todo/**").authenticated())
+                .authorizeHttpRequests(
+        authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                                .anyRequest().permitAll())
+                .formLogin(httpSecurityFormLoginConfigurer ->
+                        httpSecurityFormLoginConfigurer.loginPage("/login")
+                                .defaultSuccessUrl("/todo"))
+                .logout(httpSecurityLogoutConfigurer ->
+                        httpSecurityLogoutConfigurer.logoutSuccessUrl("/"));
         return http.build();
     }
 
@@ -48,7 +48,7 @@ public class Configurer implements WebMvcConfigurer {
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/css/**", "/js/**");
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/js/**");
     }
 
     /**
