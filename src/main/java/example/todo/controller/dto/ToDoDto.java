@@ -1,6 +1,7 @@
 package example.todo.controller.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  * @details Bean Validation 으로 값 검증
  */
 @Getter @Setter
+@NoArgsConstructor
 public class ToDoDto {
 
     private Long id;
