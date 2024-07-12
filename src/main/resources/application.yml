@@ -1,10 +1,15 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:todo # db 인메모리 사용
+    url: ${mysql_url}
 #    url: jdbc:h2:tcp://localhost/~/example-todo # db 경로
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    username: ${mysql_username}
+    password: ${mysql_passward}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      validation-query: select 1
+    sql:
+      init:
+        platform: mysql
 
   messages:
     basename: errors
