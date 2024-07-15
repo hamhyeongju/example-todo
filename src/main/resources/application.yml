@@ -3,7 +3,7 @@ spring:
     url: ${mysql_url}
 #    url: jdbc:h2:tcp://localhost/~/example-todo # db 경로
     username: ${mysql_username}
-    password: ${mysql_passward}
+    password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     dbcp2:
       validation-query: select 1
